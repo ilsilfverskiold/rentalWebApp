@@ -388,15 +388,8 @@ function clickHandler(e){
 			console.log(target);
 			console.log(nameEmployee);
 			console.log(roomNumber);
-			// add it to local storage
-			const buyerData = {
-    			guest: nameGuest,
-				employee: nameEmployee,
-				room: roomNumber,
-				price2: price2
-			}
-
-			window.localStorage.setItem(personData, JSON.stringify(buyerData));
+			
+			// add person data it to local storage
 			
 			if(nameGuest == null || nameGuest == "", nameEmployee == null || nameEmployee == "", roomNumber == null || roomNumber == "") {
 				checkOutWarning.style.display = "block";
