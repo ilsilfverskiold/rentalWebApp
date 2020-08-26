@@ -1,0 +1,484 @@
+<%- include("partials/header") %>
+
+<!-- container with all inside it - keep it full width -->
+<div class="container home" id="width100">
+
+<!-- row of fixed cart at top left corner -->
+<div class="row">
+    <div class="col">
+    	<div class="dropdown">
+
+    		<!-- always shown cart & number -->
+  			<button class="btn btn-secondary dropdown-toggle sticky" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+  			<!-- change this based on number of items chosen -->
+    		<i class="fas fa-shopping-cart"></i> <span class="badge badge-primary badge-pill">0</span>
+  			</button>
+
+  			<!-- hidden drop down -->
+  			<div class="dropdown-menu p-3 dropdown-menu-right" x-placement="bottom-end">
+
+  					<div class="productListInCart">
+  						<!-- example item - change this -->
+  						<!-- <figure class="itemside mb-3">
+						<figcaption class="info align-self-center">
+							<p class="title">Ski Boots</p>
+							<i class="fa fa-trash float-right"></i>
+							<div class="price">2 people for 3 days (30€)</div>
+						</figcaption>
+						</figure> -->
+						<!-- end example item -->
+  					</div>
+				    
+					<!-- end example item -->
+					
+					<!-- total price - example - change this -->
+					<div class="price-wrap text-center py-3 border-top">Subtotal: <strong class="h5 price subtotalCart">0€</strong></div>
+					<a href="" class="btn btn-primary btn-block checkout"> Checkout </a>
+			  </div>
+  		</div>
+	</div>
+</div>
+<!-- end row or fixed header cart -->
+ 
+
+<!-- New row - 3 items on each row - you can loop through a database instead of having them here -->
+<div class="row">
+  	<div class="card-group">
+
+  		<!-- card with item -->
+  		<div class="card">
+    		<img class="productImage" src="https://nardellisport.com/eshop/prestashop/4225-large_default/head-raptor-70-rs-2020-scarponi-da-gara-junior-70.jpg" class="card-img-top" alt="...">
+    		<div class="card-body">
+      			<h5 class="card-title">Ski Boots</h5>
+      			<p class="card-text"><small class="text-muted"><span class="productPrice"></span> per day per person</small></p>
+				  <select class="custom-select inline noWidth" id="inputPBoots">
+				    <option selected>P</option>
+				    <option value="1">1</option>
+				    <option value="2">2</option>
+				    <option value="3">3</option>
+				    <option value="4">4</option>
+				    <option value="5">5</option>
+				  </select>
+				  <select class="custom-select inline noWidth" id="inputDBoots">
+				    <option selected>D</option>
+				   	<option value="1">1</option>
+				    <option value="2">2</option>
+				    <option value="3">3</option>
+				    <option value="4">4</option>
+				    <option value="5">5</option>
+				    <option value="6">6</option>
+				    <option value="7">7</option>
+				    <option value="8">8</option>
+				    <option value="9">9</option>
+				    <option value="10">10</option>
+				    <option value="11">11</option>
+				  </select>
+  	  			  <button type="button" class="btn btn-outline-primary inline addToCart" id="addSkiBoots">Add to cart <i class="fas fa-shopping-cart"></i></button>
+  			</div>
+  		</div>
+  		<!-- end card with item -->
+
+  		<!-- card with item -->
+  		<div class="card">
+    		<img class="productImage" src="https://cdni.llbean.net/is/image/wim/509216_36755_41?hei=1095&wid=950&resMode=sharp2&defaultImage=llbstage/A0211793_2" class="card-img-top" alt="...">
+    		<div class="card-body">
+      			<h5 class="card-title">Ski Helmet</h5>
+      			<p class="card-text"><small class="text-muted"><span class="productPrice"></span> per day per person</small></p>
+				  <select class="custom-select inline noWidth" id="inputP">
+				    <option selected>P</option>
+				    <option value="1">1</option>
+				    <option value="2">2</option>
+				    <option value="3">3</option>
+				    <option value="4">4</option>
+				    <option value="5">5</option>
+				  </select>
+				  <select class="custom-select inline noWidth" id="inputD">
+				    <option selected>D</option>
+				   	<option value="1">1</option>
+				    <option value="2">2</option>
+				    <option value="3">3</option>
+				    <option value="4">4</option>
+				    <option value="5">5</option>
+				    <option value="6">6</option>
+				    <option value="7">7</option>
+				    <option value="8">8</option>
+				    <option value="9">9</option>
+				    <option value="10">10</option>
+				    <option value="11">11</option>
+				  </select>
+  	  			  <button type="button" class="btn btn-outline-primary inline addToCart">Add to cart <i class="fas fa-shopping-cart"></i></button>   
+  			</div>
+  		</div>
+  		<!-- end card with item -->
+
+  		<!-- card with item -->
+  		<div class="card">
+    		<img class="productImage" src="https://www.botteroski.com/24630-large_default/ski-goggles-head-infinity-race-lens-white-lime.jpg" class="card-img-top" alt="...">
+    		<div class="card-body">
+      			<h5 class="card-title">Ski Googles</h5>
+      			<p class="card-text"><small class="text-muted"><span class="productPrice"></span> per day per person</small></p>
+				  <select class="custom-select inline noWidth" id="inputGroupSelect01">
+				    <option selected>P</option>
+				    <option value="1">1</option>
+				    <option value="2">2</option>
+				    <option value="3">3</option>
+				    <option value="4">4</option>
+				    <option value="5">5</option>
+				  </select>
+				  <select class="custom-select inline noWidth" id="inputGroupSelect01">
+				    <option selected>D</option>
+				   	<option value="1">1</option>
+				    <option value="2">2</option>
+				    <option value="3">3</option>
+				    <option value="4">4</option>
+				    <option value="5">5</option>
+				    <option value="6">6</option>
+				    <option value="7">7</option>
+				    <option value="8">8</option>
+				    <option value="9">9</option>
+				    <option value="10">10</option>
+				    <option value="11">11</option>
+				  </select>
+  	  			  <button type="button" class="btn btn-outline-primary inline addToCart">Add to cart <i class="fas fa-shopping-cart"></i></button>   
+  			</div>
+  		</div>
+  		<!-- end card with item -->
+
+	</div>
+</div> <!-- end row with card group -->
+
+
+<!-- New row - 3 items on each row -->
+<div class="row">
+  	<div class="card-group">
+
+  		<!-- card with item -->
+  		<div class="card">
+    		<img class="productImage" src="https://www.onboardstore.it/wp-content/uploads/2019/05/Black-Diamond-Expedition-3-Ski-Poles-bastoni-splitboard.jpg" class="card-img-top" alt="...">
+    		<div class="card-body">
+      			<h5 class="card-title">Ski Poles</h5>
+      			<p class="card-text"><small class="text-muted"><span class="productPrice"></span> per day per person</small></p>
+				  <select class="custom-select inline noWidth" id="inputGroupSelect01">
+				    <option selected>P</option>
+				    <option value="1">1</option>
+				    <option value="2">2</option>
+				    <option value="3">3</option>
+				    <option value="4">4</option>
+				    <option value="5">5</option>
+				  </select>
+				  <select class="custom-select inline noWidth" id="inputGroupSelect01">
+				    <option selected>D</option>
+				   	<option value="1">1</option>
+				    <option value="2">2</option>
+				    <option value="3">3</option>
+				    <option value="4">4</option>
+				    <option value="5">5</option>
+				    <option value="6">6</option>
+				    <option value="7">7</option>
+				    <option value="8">8</option>
+				    <option value="9">9</option>
+				    <option value="10">10</option>
+				    <option value="11">11</option>
+				  </select>
+  	  			  <button type="button" class="btn btn-outline-primary inline addToCart">Add to cart <i class="fas fa-shopping-cart"></i></button>   
+  			</div>
+  		</div>
+  		<!-- end card with item -->
+
+  		<!-- card with item -->
+  		<div class="card">
+    		<img class="productImage" src="https://i5.walmartimages.ca/images/Large/195/297/195297.jpg" class="card-img-top" alt="...">
+    		<div class="card-body">
+      			<h5 class="card-title">Snow Shoes</h5>
+      			<p class="card-text"><small class="text-muted"><span class="productPrice"></span> per day per person</small></p>
+				  <select class="custom-select inline noWidth" id="inputGroupSelect01">
+				    <option selected>P</option>
+				    <option value="1">1</option>
+				    <option value="2">2</option>
+				    <option value="3">3</option>
+				    <option value="4">4</option>
+				    <option value="5">5</option>
+				  </select>
+				  <select class="custom-select inline noWidth" id="inputGroupSelect01">
+				    <option selected>D</option>
+				   	<option value="1">1</option>
+				    <option value="2">2</option>
+				    <option value="3">3</option>
+				    <option value="4">4</option>
+				    <option value="5">5</option>
+				    <option value="6">6</option>
+				    <option value="7">7</option>
+				    <option value="8">8</option>
+				    <option value="9">9</option>
+				    <option value="10">10</option>
+				    <option value="11">11</option>
+				  </select>
+  	  			  <button type="button" class="btn btn-outline-primary inline addToCart">Add to cart <i class="fas fa-shopping-cart"></i></button>   
+  			</div>
+  		</div>
+  		<!-- end card with item -->
+
+  		<!-- card with item -->
+  		<div class="card">
+    		<img class="productImage" src="https://static.bergzeit.de/out/pictures-imago/generated/product/3b/6a/610x610/5020465-001_pic1.jpg" class="card-img-top" alt="...">
+    		<div class="card-body">
+      			<h5 class="card-title">Crampoons</h5>
+      			<p class="card-text"><small class="text-muted"><span class="productPrice"></span> per day per person</small></p>
+				  <select class="custom-select inline noWidth" id="inputGroupSelect01">
+				   <option selected>P</option>
+				    <option value="1">1</option>
+				    <option value="2">2</option>
+				    <option value="3">3</option>
+				    <option value="4">4</option>
+				    <option value="5">5</option>
+				  </select>
+				  <select class="custom-select inline noWidth" id="inputGroupSelect01">
+				    <option selected>D</option>
+				   	<option value="1">1</option>
+				    <option value="2">2</option>
+				    <option value="3">3</option>
+				    <option value="4">4</option>
+				    <option value="5">5</option>
+				    <option value="6">6</option>
+				    <option value="7">7</option>
+				    <option value="8">8</option>
+				    <option value="9">9</option>
+				    <option value="10">10</option>
+				    <option value="11">11</option>
+				  </select>
+  	  			  <button type="button" class="btn btn-outline-primary inline addToCart">Add to cart <i class="fas fa-shopping-cart"></i></button>   
+  			</div>
+  		</div>
+  		<!-- end card with item -->
+
+	</div>
+</div> <!-- end row with card group -->
+
+
+<!-- New row - 3 items on each row -->
+<div class="row">
+  	<div class="card-group">
+
+  		<!-- card with item -->
+  		<div class="card">
+    		<img class="productImage" src="https://images-na.ssl-images-amazon.com/images/I/71AiDPwRw9L._AC_SX466_.jpg" class="card-img-top" alt="...">
+    		<div class="card-body">
+      			<h5 class="card-title">Mountain Bike</h5>
+      			<p class="card-text"><small class="text-muted"><span class="productPrice"></span> per day per person</small></p>
+				  <select class="custom-select inline noWidth" id="inputGroupSelect01">
+				    <option selected>P</option>
+				    <option value="1">1</option>
+				    <option value="2">2</option>
+				    <option value="3">3</option>
+				    <option value="4">4</option>
+				    <option value="5">5</option>
+				  </select>
+				  <select class="custom-select inline noWidth" id="inputGroupSelect01">
+				    <option selected>D</option>
+				   	<option value="1">1</option>
+				    <option value="2">2</option>
+				    <option value="3">3</option>
+				    <option value="4">4</option>
+				    <option value="5">5</option>
+				    <option value="6">6</option>
+				    <option value="7">7</option>
+				    <option value="8">8</option>
+				    <option value="9">9</option>
+				    <option value="10">10</option>
+				    <option value="11">11</option>
+				  </select>
+  	  			  <button type="button" class="btn btn-outline-primary inline addToCart">Add to cart <i class="fas fa-shopping-cart"></i></button>   
+  			</div>
+  		</div>
+  		<!-- end card with item -->
+
+  		<!-- card with item -->
+  		<div class="card">
+    		<img class="productImage" src="https://rockclimbeveryday.com/wp-content/uploads/2016/01/Rock-Climbing-Equipment.jpg" class="card-img-top" alt="...">
+    		<div class="card-body">
+      			<h5 class="card-title">Climbing Gear</h5>
+      			<p class="card-text"><small class="text-muted"><span class="productPrice"></span> per day per person</small></p>
+				  <select class="custom-select inline noWidth" id="inputGroupSelect01">
+				    <option selected>P</option>
+				    <option value="1">1</option>
+				    <option value="2">2</option>
+				    <option value="3">3</option>
+				    <option value="4">4</option>
+				    <option value="5">5</option>
+				  </select>
+				  <select class="custom-select inline noWidth" id="inputGroupSelect01">
+				    <option selected>D</option>
+				   	<option value="1">1</option>
+				    <option value="2">2</option>
+				    <option value="3">3</option>
+				    <option value="4">4</option>
+				    <option value="5">5</option>
+				    <option value="6">6</option>
+				    <option value="7">7</option>
+				    <option value="8">8</option>
+				    <option value="9">9</option>
+				    <option value="10">10</option>
+				    <option value="11">11</option>
+				  </select>
+  	  			  <button type="button" class="btn btn-outline-primary inline addToCart">Add to cart <i class="fas fa-shopping-cart"></i></button>   
+  			</div>
+  		</div>
+  		<!-- end card with item -->
+
+  		<!-- card with item -->
+  		<div class="card">
+    		<img class="productImage" src="https://i.pinimg.com/originals/7b/ce/65/7bce65440c949d3edee7c55e110cd1be.jpg" class="card-img-top" alt="...">
+    		<div class="card-body">
+      			<h5 class="card-title">ABS Backpacks</h5>
+      			<p class="card-text"><small class="text-muted"><span class="productPrice"></span> per day per person</small></p>
+				  <select class="custom-select inline noWidth" id="inputGroupSelect01">
+				    <option selected>P</option>
+				    <option value="1">1</option>
+				    <option value="2">2</option>
+				    <option value="3">3</option>
+				    <option value="4">4</option>
+				    <option value="5">5</option>
+				  </select>
+				  <select class="custom-select inline noWidth" id="inputGroupSelect01">
+				    <option selected>D</option>
+				   	<option value="1">1</option>
+				    <option value="2">2</option>
+				    <option value="3">3</option>
+				    <option value="4">4</option>
+				    <option value="5">5</option>
+				    <option value="6">6</option>
+				    <option value="7">7</option>
+				    <option value="8">8</option>
+				    <option value="9">9</option>
+				    <option value="10">10</option>
+				    <option value="11">11</option>
+				  </select>
+  	  			  <button type="button" class="btn btn-outline-primary inline addToCart">Add to cart <i class="fas fa-shopping-cart"></i></button>   
+  			</div>
+  		</div>
+  		<!-- end card with item -->
+
+	</div>
+</div> <!-- end row with card group -->
+
+
+<!-- New row - 3 items on each row -->
+<div class="row"> 
+  	<div class="card-group">
+
+  		<!-- card with item -->
+  		<div class="card">
+    		<img class="productImage" src="https://www.intersportrent.at/website/images/modelle-2021/fischer-xtr-race/image-thumb__23508__auto_e3c44b5ee65eaad7c6ba143e4c419346/fischer-xtr-race-economy-seite.jpeg" class="card-img-top" alt="...">
+    		<div class="card-body">
+      			<h5 class="card-title">Ski Set Economy</h5>
+      			<p class="card-text"><small class="text-muted"><span class="productPrice"></span> per day or <span class="productPrice"></span> for 6 days</small></p>
+				  <select class="custom-select inline noWidth" id="inputGroupSelect01">
+				    <option selected>P</option>
+				    <option value="1">1</option>
+				    <option value="2">2</option>
+				    <option value="3">3</option>
+				    <option value="4">4</option>
+				    <option value="5">5</option>
+				  </select>
+				  <select class="custom-select inline noWidth" id="inputGroupSelect01">
+				    <option selected>D</option>
+				   	<option value="1">1</option>
+				    <option value="2">2</option>
+				    <option value="3">3</option>
+				    <option value="4">4</option>
+				    <option value="5">5</option>
+				    <option value="6">6</option>
+				    <option value="7">7</option>
+				    <option value="8">8</option>
+				    <option value="9">9</option>
+				    <option value="10">10</option>
+				    <option value="11">11</option>
+				  </select>
+  	  			  <button type="button" class="btn btn-outline-primary inline addToCart">Add to cart <i class="fas fa-shopping-cart"></i></button>   
+  			</div>
+  		</div>
+  		<!-- End card with item -->
+
+  		<!-- card with item -->
+  		<div class="card">
+    		<img class="productImage" src="https://ritosa.si/4409/woman-skis-elan-speed-magic-ps-2020.jpg" class="card-img-top" alt="...">
+    		<div class="card-body">
+      			<h5 class="card-title">Ski Set Performance</h5>
+      			<p class="card-text"><small class="text-muted"><span class="productPrice"></span> per day or <span class="productPrice"></span> for 6 days</small></p>
+				  <select class="custom-select inline noWidth" id="inputGroupSelect01">
+				    <option selected>P</option>
+				    <option value="1">1</option>
+				    <option value="2">2</option>
+				    <option value="3">3</option>
+				    <option value="4">4</option>
+				    <option value="5">5</option>
+				  </select>
+				  <select class="custom-select inline noWidth" id="inputGroupSelect01">
+				    <option selected>D</option>
+				   	<option value="1">1</option>
+				    <option value="2">2</option>
+				    <option value="3">3</option>
+				    <option value="4">4</option>
+				    <option value="5">5</option>
+				    <option value="6">6</option>
+				    <option value="7">7</option>
+				    <option value="8">8</option>
+				    <option value="9">9</option>
+				    <option value="10">10</option>
+				    <option value="11">11</option>
+				  </select>
+  	  			  <button type="button" class="btn btn-outline-primary inline addToCart">Add to cart <i class="fas fa-shopping-cart"></i></button>   
+  			</div>
+  		</div>
+  		<!-- End card with item -->
+
+  		<!-- card with item -->
+  		<div class="card">
+    		<img class="productImage" src="pics/dps.png" class="card-img-top" alt="...">
+    		<div class="card-body">
+      			<h5 class="card-title">Ski Set Professional</h5>
+      			<p class="card-text"><small class="text-muted"><span class="productPrice"></span> per day or <span class="productPrice"></span> for 6 days</small></p>
+				  <select class="custom-select inline noWidth" id="inputGroupSelect01">
+				    <option selected>P</option>
+				    <option value="1">1</option>
+				    <option value="2">2</option>
+				    <option value="3">3</option>
+				    <option value="4">4</option>
+				    <option value="5">5</option>
+				  </select>
+				  <select class="custom-select inline noWidth" id="inputGroupSelect01">
+				    <option selected>D</option>
+				   	<option value="1">1</option>
+				    <option value="2">2</option>
+				    <option value="3">3</option>
+				    <option value="4">4</option>
+				    <option value="5">5</option>
+				    <option value="6">6</option>
+				    <option value="7">7</option>
+				    <option value="8">8</option>
+				    <option value="9">9</option>
+				    <option value="10">10</option>
+				    <option value="11">11</option>
+				  </select>
+  	  			  <button type="button" class="btn btn-outline-primary inline addToCart">Add to cart <i class="fas fa-shopping-cart"></i></button>   
+  			</div>
+  		</div>
+  		<!-- End card with item -->
+
+	</div>
+</div> <!-- End row with card group -->
+   
+
+<!-- Row check out button -->
+<div class="row">
+	<div class="col-sm noPadding">
+    	<a href="/checkout"><button type="button" class="btn btn-primary btn-lg btn-block noRadius checkout">Check out</button></a>
+    </div>
+</div>
+
+</div>  <!-- End body container -->
+
+
+
+
+<%- include("partials/footer") %>

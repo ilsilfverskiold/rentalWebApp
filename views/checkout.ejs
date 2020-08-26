@@ -1,0 +1,170 @@
+<%- include("partials/header") %>
+
+<div class="container checkoutPage" id="width100">
+
+<!-- messages when submitting - change according to result when submitting -->
+
+	<!-- success -->
+	<div class="row">
+		<div class="col">
+			<p class="alert alert-success noMargin"> Success. The cost have been added to the room of the customer. You'll be redirected to shop in 5 sec. <a href="/"><button type="button" class="btn btn-outline-secondary alignRight">Next customer</button></a></p>
+		</div>
+	</div>
+
+	<!-- warning -->
+	<div class="row">
+		<div class="col">
+			<p class="alert alert-warning noMargin"> You need to fill out all the inputs before submitting. Try again and this time fill them all out.</p>
+		</div>
+	</div>
+
+	<!-- danger -->
+	<div class="row">
+		<div class="col">
+			<p class="alert alert-danger noMargin"> Something is wrong. </p>
+		</div>
+	</div>
+
+<!-- end messages  -->
+
+
+<!-- Row with table -->
+	<div class="row marginTop">
+		<div class="col">
+			<div class="card">
+				<div class="table-responsive">
+					<table class="table table-borderless table-shopping-cart">
+
+						<!-- head of table with products  -->
+
+						<thead class="text-muted">
+							<tr class="small text-uppercase">
+  								<th scope="col">Product</th>
+  								<th scope="col" width="120">People</th>
+  								<th scope="col" width="120">Days</th>
+  								<th scope="col" width="90">Update</th>
+  								<th scope="col" width="150">Price</th>
+  								<th scope="col" class="text-right d-none d-md-block" width="100"> </th>
+							</tr>
+						</thead>
+
+						<tbody class="productsHereCheckOut">
+
+							<!-- every tr is of a different product - loop between added products. Example of product below. -->
+							<!-- <tr>
+								<td>
+									<figure class="itemside align-items-center">
+										<figcaption class="info">
+										<a href="#" class="title text-dark">Ski Boots</a>
+										<p class="text-muted small">7€ per day <br> per person</p>
+										</figcaption>
+									</figure>
+								</td>
+								<td>
+									<select class="form-control">
+										<option>1</option>
+										<option>2</option>
+										<option>3</option>
+										<option>4</option>
+										<option>5</option>
+									</select>
+								</td>
+								<td>
+									<select class="form-control">
+										<option>1</option>
+										<option>2</option>
+										<option>3</option>
+										<option>4</option>
+										<option>5</option>
+										<option>6</option>
+										<option>7</option>
+										<option>8</option>
+										<option>9</option>
+										<option>10</option>
+										<option>11</option>
+									</select>
+								</td>
+								<td>
+									<p class="alignCenter"><i class="fas fa-sync-alt"></i></p>
+								</td>
+								<td>
+									<div class="price-wrap">
+										<var class="price">€42</var><br>
+										<small class="text-muted"> €21 x 2 </small>
+									</div> 
+								</td>
+								<td class="text-right d-none d-md-block">
+									<a href="" class="btn btn-light"> Remove</a>
+								</td>
+							</tr> -->
+							<!-- tr of product ends -->
+
+						</tbody> <!-- body of tr ends -->
+					</table> 
+				</div> 
+
+			</div> 
+		</div> 
+	</div> <!-- row of product table end -->
+
+
+<!-- New row of total price and continue button -->
+	<div class="row">
+		<div class="col">
+			<div class="card">
+				<div class="card-body">
+					<dl class="dlist-align">
+		  				<dt>Total price:</dt>
+		  				<!-- change line below based of on product changes -->
+		  				<dd class="text-right text-dark b totalPrice"><strong>€0</strong></dd>
+					</dl>
+					<hr>
+					<a href="#" class="btn btn-primary btn-block continueCheckout"> Continue </a>
+					<a href="/" class="btn btn-light btn-block backToShopOne">Go Back to Shop</a>
+				</div> 
+			</div> 
+		</div> 
+	</div> <!-- row end -->
+
+<!-- New row - client information & submit - only show the below after continuing above -->
+	<div class="row nextStepCheckOut">
+		<div class="col">
+			<div class="card">
+				<div class="card-body">
+
+					<!-- inputs - needs to be wrapped in form -->
+					<div class="form-row">
+						<div class="col form-group">
+							<label>Name of guest</label>
+				  			<input type="text" class="form-control" placeholder="">
+						</div> 
+						<div class="col form-group">
+							<label>Your name</label>
+				  			<input type="text" class="form-control" placeholder="">
+						</div> <!-- form-group end.// -->
+						<div class="col form-group">
+							<label>Room number</label>
+				  			<input type="text" class="form-control" placeholder="">
+						</div> <!-- form-group end.// -->
+					</div>
+
+					<hr>
+
+					<!-- submission or return buttons -->
+					<a href="#" class="btn btn-primary btn-block sendToReception"> Send to reception </a>
+					<a href="/" class="btn btn-light btn-block backToShopTwo">Return</a>
+
+				</div> 
+
+				<!-- information text -->
+				<div class="card-body border-top">
+					<p class="icontext"><i class="far fa-credit-card"></i> The cost of rental will be added to the room and paid through the reception</p>
+				</div> 
+
+			</div> 
+		</div> 
+	</div> <!-- row of client information & submit - end -->
+
+</div> <!-- container end -->
+
+<%- include("partials/footer") %>
