@@ -5,3 +5,5 @@ Mostly client side but the routes are set up server side so you can work with da
 Not Secure / No payment system
 
 If you want to use it, remember to get a client_secret.json file (see https://developers.google.com/sheets/api) and put it in the main directory
+
+To change js code client side see public directory otherwise main directory
