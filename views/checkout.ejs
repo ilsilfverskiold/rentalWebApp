@@ -131,27 +131,33 @@
 		<div class="col">
 			<div class="card">
 				<div class="card-body">
-
+				
+					<form action="/success" method="POST" id="sendItems">
+						
 					<!-- inputs - needs to be wrapped in form -->
 					<div class="form-row">
 						<div class="col form-group">
 							<label>Name of guest</label>
-				  			<input type="text" class="form-control" placeholder="">
+				  			<input type="text" name="nameGuest" id="firstInput" class="form-control" placeholder="" required>
 						</div> 
 						<div class="col form-group">
 							<label>Your name</label>
-				  			<input type="text" class="form-control" placeholder="">
+				  			<input type="text" name="nameEmployee" class="form-control" placeholder="" required>
 						</div> <!-- form-group end.// -->
 						<div class="col form-group">
 							<label>Room number</label>
-				  			<input type="text" class="form-control" placeholder="">
+				  			<input type="text" name="roomNumber" class="form-control" placeholder="" required>
 						</div> <!-- form-group end.// -->
 					</div>
 
 					<hr>
 
 					<!-- submission or return buttons -->
-					<a href="#" class="btn btn-primary btn-block sendToReception"> Send to reception </a>
+					<button class="btn btn-primary btn-block sendToReception">
+						Send to reception
+						</button>
+					
+					</form>
 					<a href="/" class="btn btn-light btn-block backToShopTwo">Return</a>
 
 				</div> 

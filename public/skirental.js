@@ -23,6 +23,7 @@ const prices = [boots,helmet,googles,poles,sShoes,crampoons,bike,climbing,abs,ec
 let addedItems = 0;
 let itemsInCart = 0;
 let subtotal = 0;
+let products = [];
 
 // PICK UP DOM ELEMENTS
 const container = document.querySelector(".container");
@@ -39,8 +40,8 @@ const checkOutWarning = document.querySelector(".alert-warning");
 const checkOutSuccess = document.querySelector(".alert-success");
 const sendToReceptionButton = document.querySelector(".sendToReception");
 const backToShopTwoButton = document.querySelector(".backToShopTwo");
-
-
+const sendForm = document.querySelector("#sendItems");
+const firstInput = document.querySelector("#firstInput");
 
 // HOME
 if(container.classList.contains("home")) {
@@ -76,60 +77,95 @@ if(container.classList.contains("checkoutPage")) {
 				retrieveLS(key);
 			}
 	});
+	
+	// IF FORM SUBMITTED
+	sendForm.addEventListener("submit", function() {
+		
+		// DISABLE ALL ELEMENTS
+		checkOutWarning.style.display = "none";
+		checkOutSuccess.style.display = "block";
+		sendToReceptionButton.classList.add("disabled");
+		backToShopTwoButton.classList.add("disabled");
+		productsVisualCheckOut.classList.add("disabled2");
+		
+			// WAIT 5 SEC AND THEN CLEAR LS/REDIRECT BACK TO INDEX
+			setTimeout(function(){ 
+				localStorage.clear();
+				window.location.href = "/";
+			}, 5000);
+		
+	}, false);
 }
 
+// FUNCTION RETRIEVE LS DATA
 async function retrieveLS (key) {
-				const LSKey = JSON.parse(window.localStorage.getItem(key));
-				const product = LSKey.product;
-				const desc = LSKey.desc;
-				const price1 = LSKey.price1;
-				const price2 = LSKey.price2;
-				const p = LSKey.people;
-				const d = LSKey.days;
-				const total = LSKey.total;
-				if(container.classList.contains("checkoutPage")) {
-					checkoutProducts (product, desc, price1, price2, p, d, total, key);
-				}
-				if(container.classList.contains("home")) {
-					cartProducts(product,total,p,d,key);
-				}
+	
+	// GET VALUES
+	const LSKey = JSON.parse(window.localStorage.getItem(key)),
+	product = LSKey.product,
+	desc = LSKey.desc,
+	price1 = LSKey.price1,
+	price2 = LSKey.price2,
+	p = LSKey.people,
+	d = LSKey.days,
+	total = LSKey.total;
+	
+		// DO SOMETHING WITH VALUES
+		if(container.classList.contains("checkoutPage") && !(productsVisualCheckOut.classList.contains("disabled2"))) {
+			checkoutProducts (product, desc, price1, price2, p, d, total, key);
+		}
+		if(container.classList.contains("home")) {
+			cartProducts(product,total,p,d,key);
+		}
+		if(productsVisualCheckOut.classList.contains("disabled2")) {
+			appendInputs(key,LSKey);
+		}
+}
+
+// FUNCTION APPEND HIDDEN INPUTS TO END FORM
+function appendInputs(key,LSKey) {
+	const newInput = document.createElement('input');
+	newInput.type = "hidden";
+	newInput.name = key;
+	newInput.value = JSON.stringify(LSKey);
+	sendForm.prepend(newInput);
 }
 
 
 // FUNCTION - ADD PRODUCT TO CART
 async function cartProducts(productName,total,p,d,itemName) {
 
-	// add items to the visual cart
+	// ADD TO BADGE
 	addedItems += 1;
 	cartBadge.innerHTML = addedItems;
 	console.log(addedItems);
 
-	// change the subtotal
+	// CHANGE SUBTOTAL
 	subtotal += total;
 
-		// show the items in the cart by appending a new figure 
-		const figure = document.createElement('figure');
-		figure.className = "itemside mb-3";
-		figure.innerHTML = "<figcaption class='info align-self-center' id='" + itemName + "'>" +
+	// APPEND FIGURE TO CART 
+	const figure = document.createElement('figure');
+	figure.className = "itemside mb-3";
+	figure.innerHTML = "<figcaption class='info align-self-center' id='" + itemName + "'>" +
 								"<p class='title'>" + productName + "</p>" +
 								"<i class='fa fa-trash float-right removeFromCart'></i>" +
 								"<div class='price'>" + p + " people for " + d + " days (<span class='totalForItem'>" + total +"<span>€)</div>" + "</figcaption>";
-		cartProductList.appendChild(figure);
-		subtotalCart.innerHTML = subtotal + "€";
+	cartProductList.appendChild(figure);
+	subtotalCart.innerHTML = subtotal + "€";
 }
 
-// FUNCTION - ADD PRODUCT TO CART
+// FUNCTION - ADD PRODUCT TO VISUAL CHECKOUT TABLE
 async function checkoutProducts (product, desc, price1, price2, p, d, total, LSKey) {
 
-	// change the subtotal
+	// CHANGE SUBTOTAL BY ADDING ON THE PRODUCT TOTAL
 	subtotal += total;
 	console.log(subtotal);
 	subtotalCheckOut.innerHTML = "<strong>€" + subtotal + "</strong>";
-
-		// // show the items in the cart by appending a new figure 
-		const figureTR = document.createElement('tr');
 	
-		// // create selected P element
+	// APPEND PRODUCT ITEM IN VISUAL CHECKOUT TABLE
+	const figureTR = document.createElement('tr');
+	
+		// CREATE P ELEMENT
 		let selectP = "<select class='form-control' id='p'>";
 		for(let k = 1; k < 6; k++) {
 			if(k===6) {
@@ -142,7 +178,7 @@ async function checkoutProducts (product, desc, price1, price2, p, d, total, LSK
 			}
 		}
 	
-		// // create selected D element
+		// CREATE D ELEMENT
 		let selectD = "<select class='form-control' id='d'>";
 		for(let t = 1; t < 12; t++) {
 			if(t===12) {
@@ -155,8 +191,8 @@ async function checkoutProducts (product, desc, price1, price2, p, d, total, LSK
 			}
 		}
 		
+		// SET ID TO THE ELEMENT - SO IT CAN BE IDENTIFIED AND MATCHED WITH LS KEYS
 		figureTR.id = LSKey;
-		// // insert product figure for each items
 		figureTR.innerHTML = "<td>" +
 									"<figure class='itemside align-items-center'>" +
 										"<figcaption class='info'>" +
@@ -183,7 +219,7 @@ async function checkoutProducts (product, desc, price1, price2, p, d, total, LSK
 								"<td class='text-right d-none d-md-block'>" +
 									"<a href='#' class='btn btn-light removeFromCheckout'> Remove</a>" +
 								"</td>";
-		// // append figure
+		// APPEND THE ELEMENT TO THE TABLE
 		productsVisualCheckOut.appendChild(figureTR);
 }
 
@@ -192,59 +228,70 @@ async function checkoutProducts (product, desc, price1, price2, p, d, total, LSK
 // FUNCTION - ADD PRODUCT TO LS
 async function addToLocal(productName,total,p,d,desc,price1,price2) {
 	
-	// check if itemName exists before adding it as a key
 	let itemName;
 	const itemNameP = "item" + addedItems;
 	
-	if(localStorage.getItem(itemNameP)===null){
-		itemName = itemNameP;
-	} if(localStorage.getItem(itemNameP)!==null) {
-		itemName = itemNameP + 1;
-	}
-	// add it to local storage (check if exsists first)
+		// CHECK IF THE KEY NAME ALREADY EXSIST 
+		if(localStorage.getItem(itemNameP)===null){
+			itemName = itemNameP;
+		} if(localStorage.getItem(itemNameP)!==null) {
+			itemName = itemNameP + 1;
+		}
+	
+	// SET ITEM
 	const item = {
-    product: productName,
-	desc: desc,
-	price1: price1,
-	price2: price2,
-    people: p,
-    days: d,
-    total: total
+		product: productName,
+		desc: desc,
+		price1: price1,
+		price2: price2,
+		people: p,
+		days: d,
+		total: total
 	}
-
+	
+	// SEND ITEM TO LS 
 	window.localStorage.setItem(itemName, JSON.stringify(item));
+	
+	// IF AT INDEX PAGE
 	if(container.classList.contains("home")) {
-		// ADD PRODUCT TO VISUAL CART
-	cartProducts(productName,total,p,d,itemName);
+		// ALSO ADD PRODUCT TO VISUAL CART
+		cartProducts(productName,total,p,d,itemName);
 	}
 	
 }
 
 // FUNCTION - REMOVE PRODUCT FROM LS
 async function removeFromCal(item,itemName,totalNumb) {
-			subtotal -= totalNumb;
-			addedItems -= 1;
-				if(container.classList.contains("home")) { 
-					subtotalCart.innerHTML = subtotal + "€";
-					cartBadge.innerHTML = addedItems;
-				}
-				if(container.classList.contains("checkoutPage")) { 
-					subtotalCheckOut.innerHTML = "<strong>€" + subtotal + "</strong>";
-				}
-			item.remove();
-			window.localStorage.removeItem(itemName);
+	
+	// CHANGE SUBTOTAL AND HOW MANY ITEMS HAVE BEEN ADDED 
+	subtotal -= totalNumb;
+	addedItems -= 1;
+	
+		// DIFFERENT ACTIONS ON DIFFERENT PAGES
+		if(container.classList.contains("home")) { 
+			subtotalCart.innerHTML = subtotal + "€";
+			cartBadge.innerHTML = addedItems;
+		}
+	
+		if(container.classList.contains("checkoutPage")) { 
+			subtotalCheckOut.innerHTML = "<strong>€" + subtotal + "</strong>";
+		}
+	
+		// ALWAYS REMOVE ITEM AND ROW FROM LOCAL STORAGE
+		item.remove();
+		window.localStorage.removeItem(itemName);
 }
 
-// FUNCTION - UPDATE LOCAL
+// FUNCTION - UPDATE LS
 async function updateLocal(element, key, p, d) {
 	
-	const LSKey = JSON.parse(window.localStorage.getItem(key));
-	const product = LSKey.product;
-	const productSmall = product.toLowerCase();
-	const desc = LSKey.desc;
-	const price1 = LSKey.price1;
-	const price2 = LSKey.price2;
-	const oldtotal = LSKey.total;
+	const LSKey = JSON.parse(window.localStorage.getItem(key)),
+	product = LSKey.product,
+	productSmall = product.toLowerCase(),
+	desc = LSKey.desc,
+	price1 = LSKey.price1,
+	price2 = LSKey.price2,
+	oldtotal = LSKey.total;
 	
 	element.remove();
 	subtotal -= oldtotal;
@@ -265,23 +312,26 @@ async function updateLocal(element, key, p, d) {
 			}
 			// just look for one price but multiply the second one by 6
 		} else {
-				newtotal = p*d*price1;
+			newtotal = p*d*price1;
 		}
 	
 	// add it to local storage
 	const item = {
-    product: product,
-	desc: desc,
-	price1: price1,
-	price2: price2,
-    people: p,
-    days: d,
-    total: newtotal
+		product: product,
+		desc: desc,
+		price1: price1,
+		price2: price2,
+		people: p,
+		days: d,
+		total: newtotal
 	}
 
 	window.localStorage.setItem(key, JSON.stringify(item));
 	
-	checkoutProducts (product, desc, price1, price2, p, d, newtotal, key);
+	if(container.classList.contains("checkoutPage")) { 
+			checkoutProducts (product, desc, price1, price2, p, d, newtotal, key);
+	}
+	
 	
 }
 
@@ -308,7 +358,6 @@ function clickHandler(e){
 			// pick up people and days input values
 			const p = target.parentNode.childNodes[5].value;
 			const d = target.parentNode.childNodes[7].value;
-
 
 			// if ski set look for two product prices
 			if(productSmall.includes("ski set")) {
@@ -377,37 +426,20 @@ function clickHandler(e){
 			backToShopOneButton.classList.add("disabled");
 			contCheckOutButton.classList.add("disabled");
 			productsVisualCheckOut.classList.add("disabled2");
-    	}
-	
-		// CLICK: send to reception
-		if (target.className.match(/sendToReception/)) {
-			const target = e.target.parentNode.children[0].children[0].children[1].value;
-			const nameGuest = e.target.parentNode.children[0].children[0].children[1].value;
-			const nameEmployee = e.target.parentNode.children[0].children[1].children[1].value;
-			const roomNumber = e.target.parentNode.children[0].children[2].children[1].value;
-			console.log(target);
-			console.log(nameEmployee);
-			console.log(roomNumber);
+			const arrayOfKeys = Object.keys(localStorage);
+				for(let a = 0; a < arrayOfKeys.length; a++) {
+					console.log(arrayOfKeys[a]);
+					const key = arrayOfKeys[a];
+					const LSKey = JSON.parse(window.localStorage.getItem(key));
+					const product = LSKey.product;
+					products.push(product);
+					retrieveLS(key);
+				}
+			setTimeout(function(){ 
+				appendInputs("Subtotal",subtotal);
+				appendInputs("Products",products);
+			}, 2000);
 			
-			// add person data it to local storage
-			
-			if(nameGuest == null || nameGuest == "", nameEmployee == null || nameEmployee == "", roomNumber == null || roomNumber == "") {
-				checkOutWarning.style.display = "block";
-			} else {
-				e.target.parentNode.children[0].children[1].children[1].disabled = "disabled";
-				e.target.parentNode.children[0].children[0].children[1].disabled = "disabled";
-				e.target.parentNode.children[0].children[2].children[1].disabled = "disabled";
-				checkOutWarning.style.display = "none";
-				checkOutSuccess.style.display = "block";
-				sendToReceptionButton.classList.add("disabled");
-				backToShopTwoButton.classList.add("disabled");
-				productsVisualCheckOut.classList.add("disabled2");
-				// send info to db or other alt here
-				setTimeout(function(){ 
-					localStorage.clear();
-					window.location.href = "/";
-				}, 5000);
-			}
     	}
 	
 }
